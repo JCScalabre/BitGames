@@ -1,0 +1,29 @@
+body {
+	margin-left: 10px;
+}
+
+#solutiongrid {
+	background-color: black;
+	height: 585px;
+	width: 585px;
+	padding: 5px;
+}
+
+.square {
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin: 7.5px;
+}
+
+.grey {
+	background-color: grey
+}
+
+.green {
+	background-color: green
+}
+
+button {
+	padding: 13px 21px;
+}

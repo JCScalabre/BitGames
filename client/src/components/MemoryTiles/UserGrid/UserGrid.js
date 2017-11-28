@@ -3,7 +3,7 @@ import "./UserGrid.css";
 
 const UserGrid = props => (
 	<div>
-		<h3>User Input Grid:</h3>
+		<h3>User Input Grid (Will be shown after the solution is shown for 5s):</h3>
 		<div id="usergrid">
 			{props.grid.map((number, i) => {
 				return (

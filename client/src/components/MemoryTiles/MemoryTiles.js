@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import SolutionGrid from "../SolutionGrid";
-import UserGrid from "../UserGrid";
+import BlankGrid from "./BlankGrid";
+import SolutionGrid from "./SolutionGrid";
+import UserGrid from "./UserGrid";
 import "./MemoryTiles.css";
 import API from "../../utils/API";
 
@@ -11,31 +12,31 @@ const green = "rgb(0, 128, 0)";
 class MemoryTiles extends Component {
 	state = {
 		solution: [
-		1,
-		1,
-		1,
-		1,
-		1,
-		1,
-		1,
-		1,
-		1,
-		1,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0
+			1,
+			1,
+			1,
+			1,
+			1,
+			1,
+			1,
+			1,
+			1,
+			1,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0
 		],
 		grid: []
 	};
@@ -44,7 +45,7 @@ class MemoryTiles extends Component {
 		// Shuffle our solution grid:
 		this.shuffle(this.state.solution);
 		// Set up our user input grid:
-		this.setGrid();
+		this.setUserGrid();
 	}
 
 	// Our function that 'shuffles' an array using the Durstenfeld shuffle:
@@ -58,13 +59,13 @@ class MemoryTiles extends Component {
 	};
 
 	// Set up user input grid:
-	setGrid = () => {
+	setUserGrid = () => {
 		for (var i = 0; i < 25; i++) {
 			this.state.grid.push(0);
 		}
 	};
 
-	// Our function that changes the color and state of the user input grid.
+	// Our function that changes the color and state of the user input grid when a square is clicked:
 	changecolor = event => {
 		var color = $(event.target).css("background-color");
 		var i = $(event.target).attr("tilenumber");
@@ -82,6 +83,7 @@ class MemoryTiles extends Component {
 		}
 	};
 
+	// When the submit button is pressed:
 	submit = event => {
 		event.preventDefault();
 		var result = 0;
@@ -91,35 +93,30 @@ class MemoryTiles extends Component {
 				result++;
 			}
 		}
-		var obj = {};
-		obj.name = name;
-		obj.score = result;
-		API.submitScore(obj);
-		alert("You scored " + result + " out of 25")
-	}
+		var objToSendToDB = {};
+		objToSendToDB.name = name;
+		objToSendToDB.score = result*100/25;
+		API.submitScore(objToSendToDB);
+		alert("You scored " + (result*100/25) + "% (" + result + " out of 25).");
+	};
 
-	render () {
+	render() {
 		return (
 			<div>
-				<SolutionGrid
-					solution={this.state.solution}
-				/>
-				<UserGrid
-					grid={this.state.grid}
-					changecolor={this.changecolor}
-				/>
-				<br/>
+				<BlankGrid />
+				<SolutionGrid solution={this.state.solution} />
+				<UserGrid grid={this.state.grid} changecolor={this.changecolor} />
+				<br />
 				<form>
 					<div className="form-group">
 						<label>Enter your name:</label>
-						<input className="form-control" id="name"/>
+						<input className="form-control" id="name" />
 					</div>
 				</form>
 				<button onClick={this.submit}>Submit</button>
 			</div>
-			)
+		);
 	}
-
 }
 
 export default MemoryTiles;
