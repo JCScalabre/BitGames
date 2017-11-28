@@ -83,11 +83,25 @@ class MemoryTiles extends Component {
 		}
 	};
 
+	// When the start button is pressed:
+	start = event => {
+		event.preventDefault();
+		$("#blankgrid").css("display", "none");
+		$("#solutiongrid").css("display", "block");
+		setTimeout(function() {
+			$("#solutiongrid").css("display", "none");
+			$("#usergrid").css("display", "block");
+		}, 5000);
+	};
+
 	// When the submit button is pressed:
 	submit = event => {
 		event.preventDefault();
 		var result = 0;
 		var name = $("#name").val();
+		if (name === "") {
+			name = "Anonymous";
+		}
 		for (var i = 0; i < this.state.solution.length; i++) {
 			if (this.state.solution[i] === this.state.grid[i]) {
 				result++;
@@ -95,14 +109,19 @@ class MemoryTiles extends Component {
 		}
 		var objToSendToDB = {};
 		objToSendToDB.name = name;
-		objToSendToDB.score = result*100/25;
+		objToSendToDB.score = result * 100 / 25;
 		API.submitScore(objToSendToDB);
-		alert("You scored " + (result*100/25) + "% (" + result + " out of 25).");
+		alert(
+			"You scored " + result * 100 / 25 + "% (" + result + " out of 25)."
+		);
 	};
 
 	render() {
 		return (
 			<div>
+				<button className="btn btn-success" onClick={this.start}>
+					Start
+				</button>
 				<BlankGrid />
 				<SolutionGrid solution={this.state.solution} />
 				<UserGrid grid={this.state.grid} changecolor={this.changecolor} />
@@ -113,7 +132,9 @@ class MemoryTiles extends Component {
 						<input className="form-control" id="name" />
 					</div>
 				</form>
-				<button className="btn btn-success" onClick={this.submit}>Submit</button>
+				<button className="btn btn-success" onClick={this.submit}>
+					Submit
+				</button>
 			</div>
 		);
 	}

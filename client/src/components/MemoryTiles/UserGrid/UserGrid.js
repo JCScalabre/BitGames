@@ -2,8 +2,7 @@ import React from "react";
 
 const UserGrid = props => (
 	<div>
-		<h3>User Input Grid (Will be shown after the solution is hidden)(Is clickable):</h3>
-		<div className="grid">
+		<div id="usergrid" className="grid">
 			{props.grid.map((number, i) => {
 				return (
 					<div
