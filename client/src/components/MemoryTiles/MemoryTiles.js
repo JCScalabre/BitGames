@@ -3,6 +3,7 @@ import $ from "jquery";
 import BlankGrid from "./BlankGrid";
 import SolutionGrid from "./SolutionGrid";
 import UserGrid from "./UserGrid";
+import Modal from "../Modal";
 import "./MemoryTiles.css";
 import API from "../../utils/API";
 
@@ -111,9 +112,7 @@ class MemoryTiles extends Component {
 		objToSendToDB.name = name;
 		objToSendToDB.score = result * 100 / 25;
 		API.submitScore(objToSendToDB);
-		alert(
-			"You scored " + result * 100 / 25 + "% (" + result + " out of 25)."
-		);
+		this.setState({ result: result })
 	};
 
 	render() {
@@ -132,9 +131,12 @@ class MemoryTiles extends Component {
 						<input className="form-control" id="name" />
 					</div>
 				</form>
-				<button className="btn btn-success" onClick={this.submit}>
+				<button id="submit" className="btn btn-success" data-toggle="modal" data-target="#testmodal" onClick={this.submit}>
 					Submit
 				</button>
+				<Modal 
+				result={this.state.result}
+				/>
 			</div>
 		);
 	}
