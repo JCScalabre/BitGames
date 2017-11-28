@@ -42,7 +42,7 @@ app.post("/api/scores", (req, res) => {
 })
 
 app.get("/api/scores", (req, res) => {
-	db.Score.find()
+	db.Score.find().sort({ score: -1 })
 	.then(scores => res.json(scores))
 })
 

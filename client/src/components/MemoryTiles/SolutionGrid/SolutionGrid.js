@@ -1,10 +1,9 @@
 import React from "react";
-import "./SolutionGrid.css";
 
 const SolutionGrid = props => (
 	<div>
 		<h3>Solution Grid (Will be shown for 5s after the Start button is pressed):</h3>
-		<div id="solutiongrid">
+		<div className="grid">
 			{props.solution.map((number, i) => {
 				if (number === 0) {
 					return (

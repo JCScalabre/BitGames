@@ -10,9 +10,9 @@ class MemoryTilesPage extends Component {
 	render() {
 		return (
 			<div>
-			<Link to="/"><button>Go Home Button</button></Link>
-			<Link to="/leaderboard"><button>Go To Leaderboard Button</button></Link>
-			<h3>Memory Tiles Page:</h3>
+			<Link to="/"><button className="btn btn-primary">Go Home</button></Link>
+			<Link to="/leaderboard"><button className="btn btn-primary">Go To Leaderboard</button></Link>
+			<h3>Memory Tiles Page (All 3 components are shown currently for testing purposes):</h3>
 			<MemoryTiles/>
 			</div>
 			);

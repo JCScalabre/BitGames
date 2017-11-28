@@ -113,7 +113,7 @@ class MemoryTiles extends Component {
 						<input className="form-control" id="name" />
 					</div>
 				</form>
-				<button onClick={this.submit}>Submit</button>
+				<button className="btn btn-success" onClick={this.submit}>Submit</button>
 			</div>
 		);
 	}
