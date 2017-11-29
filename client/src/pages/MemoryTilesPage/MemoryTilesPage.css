@@ -10,7 +10,6 @@
 }
 
 .grid {
-	/*margin: 0 auto;*/
 	background-color: #000000cf;
 	height: 410px;
 	width: 410px;
@@ -65,9 +64,13 @@
 	font-family: 'Jura', sans-serif;
 }
 
+.homebtn {
+	font-size: 150%;
+}
+
 #start {
 	margin-top: 12px;
-	width: 8%;
+	width: 7%;
 }
 
 .col-6, .col-3 {

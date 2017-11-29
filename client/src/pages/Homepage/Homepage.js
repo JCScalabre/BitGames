@@ -11,12 +11,12 @@ class Homepage extends Component {
 				<div className="row">
 					<div className="col-6 mx-auto text-center">
 						<Link to="/memorytiles">
-							<button className="btn btn-primary">
+							<button className="btn homebtn btn-primary">
 								Play Memory Tiles
 							</button>
 						</Link>
 						<Link to="/leaderboard">
-							<button className="btn btn-primary">
+							<button className="btn homebtn btn-primary">
 								View Leaderboard
 							</button>
 						</Link>
