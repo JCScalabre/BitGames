@@ -122,8 +122,8 @@ class MemoryTiles extends Component {
 						MEMORY TILES
 					</div>
 				</div>
-				<div className="row">
-					<div className="col-3 cyan instructions">
+				<div className="row justify-content-md-center">
+					<div className="col cyan instructions">
 						<div>
 							Instructions: A random pattern will appear for 5 seconds.
 							Try your best to memorize it and recreate it. When you're
@@ -137,7 +137,7 @@ class MemoryTiles extends Component {
 							Start
 						</button>
 					</div>
-					<div className="col-6 centered">
+					<div className="col-md-auto">
 						<div>
 							<BlankGrid />
 							<SolutionGrid solution={this.state.solution} />
@@ -147,7 +147,7 @@ class MemoryTiles extends Component {
 							/>
 						</div>
 					</div>
-					<div className="col-3">
+					<div className="col">
 						<form>
 							<div className="form-group cyan">
 								<label>Enter your name:</label>
