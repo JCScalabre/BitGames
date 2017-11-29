@@ -6,10 +6,22 @@ class Homepage extends Component {
 
 	render() {
 		return (
-			<div>
-				<h3>Welcome to BitGames!</h3>
-				<Link to="/memorytiles"><button className="btn btn-primary">Play Memory Tiles</button></Link>
-				<Link to="/leaderboard"><button className="btn btn-primary">Go To Leaderboard</button></Link>
+			<div className="container">
+				<h3 className="bitgames">BITGAMES</h3>
+				<div className="row">
+					<div className="col">
+						<Link to="/memorytiles">
+							<button className="btn btn-primary">
+								Play Memory Tiles
+							</button>
+						</Link>
+						<Link to="/leaderboard">
+							<button className="btn btn-primary">
+								Go To Leaderboard
+							</button>
+						</Link>
+					</div>
+				</div>
 			</div>
 		);
 	}

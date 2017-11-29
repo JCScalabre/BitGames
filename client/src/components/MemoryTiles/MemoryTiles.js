@@ -4,7 +4,6 @@ import BlankGrid from "./BlankGrid";
 import SolutionGrid from "./SolutionGrid";
 import UserGrid from "./UserGrid";
 import Modal from "../Modal";
-import "./MemoryTiles.css";
 import API from "../../utils/API";
 
 const grey = "rgb(128, 128, 128)";
@@ -112,31 +111,61 @@ class MemoryTiles extends Component {
 		objToSendToDB.name = name;
 		objToSendToDB.score = result * 100 / 25;
 		API.submitScore(objToSendToDB);
-		this.setState({ result: result })
+		this.setState({ result: result });
 	};
 
 	render() {
 		return (
-			<div>
-				<button className="btn btn-success" onClick={this.start}>
-					Start
-				</button>
-				<BlankGrid />
-				<SolutionGrid solution={this.state.solution} />
-				<UserGrid grid={this.state.grid} changecolor={this.changecolor} />
-				<br />
-				<form>
-					<div className="form-group">
-						<label>Enter your name:</label>
-						<input className="form-control" id="name" />
+			<div className="container">
+				<div id="header" className="row">
+					<div className="col" id="memorytitle">
+						MEMORY TILES
 					</div>
-				</form>
-				<button id="submit" className="btn btn-success" data-toggle="modal" data-target="#testmodal" onClick={this.submit}>
-					Submit
-				</button>
-				<Modal 
-				result={this.state.result}
-				/>
+				</div>
+				<div className="row">
+					<div className="col-3 instructions">
+						<h5>
+							Instructions: A random pattern will appear for 5 seconds.
+							Try your best to memorize it and recreate it. When you're
+							ready, press Start to begin!
+						</h5>
+						<button
+							id="start"
+							className="btn btn-success"
+							onClick={this.start}
+						>
+							Start
+						</button>
+					</div>
+					<div className="col-6">
+						<div>
+							<BlankGrid />
+							<SolutionGrid solution={this.state.solution} />
+							<UserGrid
+								grid={this.state.grid}
+								changecolor={this.changecolor}
+							/>
+						</div>
+					</div>
+					<div className="col-3">
+						<form>
+							<div className="form-group">
+								<label>Enter your name:</label>
+								<input className="form-control" id="name" />
+							</div>
+						</form>
+						<button
+							id="submit"
+							className="btn btn-success"
+							data-toggle="modal"
+							data-target="#testmodal"
+							onClick={this.submit}
+						>
+							Submit
+						</button>
+					</div>
+				</div>
+				<Modal result={this.state.result} />
 			</div>
 		);
 	}

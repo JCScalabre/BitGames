@@ -1,0 +1,54 @@
+.form-control {
+	width: 60%;
+}
+
+.square {
+	float: left;
+	width: 70px;
+	height: 70px;
+	margin: 6px;
+}
+
+.grid {
+	margin: 0 auto;
+	background-color: #000000cf;
+	height: 410px;
+	width: 410px;
+}
+
+.btn {
+	border-radius: 4px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+#start {
+	position: fixed;
+}
+
+.grey {
+	background-color: grey
+}
+
+.green {
+	background-color: green
+}
+
+#solutiongrid, #usergrid {
+	display: none;
+}
+
+#header {
+	/*height: 130px;*/
+}
+
+#memorytitle {
+	color: #e6f700;
+	font-family: mexcellent;
+	font-size: 98px;
+	text-align: center;
+}
+
+.modal-content {
+	color: black;
+}
