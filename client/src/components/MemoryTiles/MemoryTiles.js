@@ -7,8 +7,9 @@ import Modal from "../Modal";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 
-const grey = "rgb(128, 128, 128)";
+const grey = "rgb(80, 80, 80)";
 const cyan = "rgb(0, 194, 255)";
+let gameisrunning = false;
 
 class MemoryTiles extends Component {
 	state = {
@@ -86,13 +87,17 @@ class MemoryTiles extends Component {
 
 	// When the start button is pressed:
 	start = event => {
-		event.preventDefault();
-		$("#blankgrid").css("display", "none");
-		$("#solutiongrid").css("display", "block");
-		setTimeout(function() {
-			$("#solutiongrid").css("display", "none");
-			$("#usergrid").css("display", "block");
-		}, 5000);
+		if (gameisrunning === false) {
+			gameisrunning = true;
+			event.preventDefault();
+			$("#blankgrid").css("display", "none");
+			$("#solutiongrid").css("display", "block");
+			$("#submit").css("display", "block");
+			setTimeout(function() {
+				$("#solutiongrid").css("display", "none");
+				$("#usergrid").css("display", "block");
+			}, 5000);
+		}
 	};
 
 	// When the submit button is pressed:
@@ -119,39 +124,35 @@ class MemoryTiles extends Component {
 		return (
 			<div className="container">
 				<div id="header" className="row">
-					<div className="col title">
-						MEMORY TILES
-					</div>
+					<div className="col title">MEMORY TILES</div>
 				</div>
 				<div className="row justify-content-md-center">
 					<div className="col cyan instructions">
 						<div>
-							Instructions: <br/> A random pattern will appear for 5 seconds.
-							Try your best to memorize it and recreate it. When you're
-							ready, press Start to begin!
+							Instructions: <br /> A random pattern will appear for 5
+							seconds. Try your best to memorize it and recreate it. When
+							you're ready, press Start to begin!
 						</div>
 						<div className="row justify-content-md-center">
-						<button
-							id="start"
-							className="btn btn-primary"
-							onClick={this.start}
-						>
-							Start
-						</button>
+							<button
+								id="start"
+								className="btn btn-primary"
+								onClick={this.start}
+							>
+								Start
+							</button>
 						</div>
 					</div>
 					<div className="col-md-auto text-center">
-							<BlankGrid />
-							<SolutionGrid solution={this.state.solution} />
-							<UserGrid
-								grid={this.state.grid}
-								changecolor={this.changecolor}
-							/>
-							<br/>
-							<Link to="/">
-							<button className="btn btn-primary">
-								Home
-							</button>
+						<BlankGrid />
+						<SolutionGrid solution={this.state.solution} />
+						<UserGrid
+							grid={this.state.grid}
+							changecolor={this.changecolor}
+						/>
+						<br />
+						<Link to="/">
+							<button className="btn btn-primary">Home</button>
 						</Link>
 						<Link to="/leaderboard">
 							<button className="btn btn-primary">
@@ -163,6 +164,7 @@ class MemoryTiles extends Component {
 						<form>
 							<div className="form-group cyan">
 								<label>Enter your name:</label>
+								<p id="leaveblank">(or leave blank to submit your score anonymously)</p>
 								<input className="form-control" id="name" />
 							</div>
 						</form>

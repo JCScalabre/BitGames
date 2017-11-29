@@ -13,7 +13,7 @@
 	}
 
 	.grey {
-		background-color: grey;
+		background-color: #505050;
 	}
 
 	.green {
@@ -49,6 +49,10 @@
 		position: fixed;
 	}
 
+	#submit {
+		display: none;
+	}
+
 /*Text Styling: */
 
 	.title {
@@ -68,6 +72,14 @@
 
 	.form-control {
 	width: 60%;
+	}
+
+	#leaveblank {
+		font-size: 75%;
+	}
+
+	label {
+		margin-bottom: 0px;
 	}
 
 /*Modal Styling: */
