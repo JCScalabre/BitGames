@@ -27,7 +27,7 @@ class Leaderboard extends Component {
 					</Link>
 					<Link to="/memorytiles">
 						<button className="btn btn-primary">
-							Go To Memory Tiles
+							Play Memory Tiles
 						</button>
 					</Link>
 				</div>

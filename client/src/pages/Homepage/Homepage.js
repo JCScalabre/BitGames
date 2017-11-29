@@ -17,7 +17,7 @@ class Homepage extends Component {
 						</Link>
 						<Link to="/leaderboard">
 							<button className="btn btn-primary">
-								Go To Leaderboard
+								View Leaderboard
 							</button>
 						</Link>
 					</div>

@@ -5,6 +5,7 @@ import SolutionGrid from "./SolutionGrid";
 import UserGrid from "./UserGrid";
 import Modal from "../Modal";
 import API from "../../utils/API";
+import { Link } from "react-router-dom";
 
 const grey = "rgb(128, 128, 128)";
 const cyan = "rgb(0, 194, 255)";
@@ -139,15 +140,24 @@ class MemoryTiles extends Component {
 						</button>
 						</div>
 					</div>
-					<div className="col-md-auto">
-						<div>
+					<div className="col-md-auto text-center">
 							<BlankGrid />
 							<SolutionGrid solution={this.state.solution} />
 							<UserGrid
 								grid={this.state.grid}
 								changecolor={this.changecolor}
 							/>
-						</div>
+							<br/>
+							<Link to="/">
+							<button className="btn btn-primary">
+								Home
+							</button>
+						</Link>
+						<Link to="/leaderboard">
+							<button className="btn btn-primary">
+								View Leaderboard
+							</button>
+						</Link>
 					</div>
 					<div className="col">
 						<form>
