@@ -9,7 +9,7 @@ class Homepage extends Component {
 			<div className="container">
 				<h3 className="bitgames">BITGAMES</h3>
 				<div className="row">
-					<div className="col">
+					<div className="col-6 mx-auto text-center">
 						<Link to="/memorytiles">
 							<button className="btn btn-primary">
 								Play Memory Tiles
