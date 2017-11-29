@@ -31,14 +31,14 @@
 }
 
 .green {
-	background-color: green
+	background-color: #00c2ff
 }
 
 #solutiongrid, #usergrid {
 	display: none;
 }
 
-#memorytitle {
+.title {
 	color: #e6f700;
 	font-family: mexcellent;
 	font-size: 98px;
@@ -46,7 +46,9 @@
 }
 
 .modal-content {
-	color: black;
+	color: #00c2ff;
+	background-color: #270e39;
+	font-family: 'Jura', sans-serif;
 }
 
 .cyan {
@@ -57,7 +59,7 @@
 	color: #00c2ff;
 }
 
-#start, #submit {
+.btn {
 	background-color: #00c2ff;
 	border: solid grey 0px;
 	font-family: 'Jura', sans-serif;

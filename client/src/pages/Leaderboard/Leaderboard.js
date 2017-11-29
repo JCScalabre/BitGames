@@ -20,7 +20,7 @@ class Leaderboard extends Component {
 	render() {
 		return (
 			<div>
-				<h3>Leaderboard Page</h3>
+				<div className="title">Leaderboard</div>
 				<Link to="/">
 					<button className="btn btn-primary">Go Home</button>
 				</Link>
@@ -28,10 +28,10 @@ class Leaderboard extends Component {
 					<button className="btn btn-primary">Go To Memory Tiles</button>
 				</Link>
 				<br/><br/>
-				<p>Leaderboard Table:</p>
+				<div className="cyan">Leaderboard Table:</div>
 				{this.state.scores.map((score, i) => {
 					return (
-						<p key={i}>Name: {score.name} || Score: {score.score}% || Date: {score.date}</p>
+						<div className="cyan" key={i}>Name: {score.name} || Score: {score.score}% || Date: {score.date}</div>
 						)
 				})}
 			</div>

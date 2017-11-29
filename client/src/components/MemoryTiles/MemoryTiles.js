@@ -7,7 +7,7 @@ import Modal from "../Modal";
 import API from "../../utils/API";
 
 const grey = "rgb(128, 128, 128)";
-const green = "rgb(0, 128, 0)";
+const cyan = "rgb(0, 194, 255)";
 
 class MemoryTiles extends Component {
 	state = {
@@ -70,12 +70,12 @@ class MemoryTiles extends Component {
 		var color = $(event.target).css("background-color");
 		var i = $(event.target).attr("tilenumber");
 		if (color === grey) {
-			$(event.target).css("background-color", green);
+			$(event.target).css("background-color", cyan);
 			var newState = this.state.grid;
 			newState[i] = 1;
 			this.setState({ grid: newState });
 		}
-		if (color === green) {
+		if (color === cyan) {
 			$(event.target).css("background-color", grey);
 			var newState2 = this.state.grid;
 			newState2[i] = 0;
@@ -118,7 +118,7 @@ class MemoryTiles extends Component {
 		return (
 			<div className="container">
 				<div id="header" className="row">
-					<div className="col" id="memorytitle">
+					<div className="col title">
 						MEMORY TILES
 					</div>
 				</div>
@@ -132,7 +132,7 @@ class MemoryTiles extends Component {
 						<div className="row justify-content-md-center">
 						<button
 							id="start"
-							className="btn btn-success"
+							className="btn btn-primary"
 							onClick={this.start}
 						>
 							Start
@@ -158,7 +158,7 @@ class MemoryTiles extends Component {
 						</form>
 						<button
 							id="submit"
-							className="btn btn-success"
+							className="btn btn-primary"
 							data-toggle="modal"
 							data-target="#testmodal"
 							onClick={this.submit}
