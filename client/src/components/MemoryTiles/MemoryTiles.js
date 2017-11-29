@@ -123,12 +123,12 @@ class MemoryTiles extends Component {
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-3 instructions">
-						<h5>
+					<div className="col-3 cyan instructions">
+						<div>
 							Instructions: A random pattern will appear for 5 seconds.
 							Try your best to memorize it and recreate it. When you're
 							ready, press Start to begin!
-						</h5>
+						</div>
 						<button
 							id="start"
 							className="btn btn-success"
@@ -137,7 +137,7 @@ class MemoryTiles extends Component {
 							Start
 						</button>
 					</div>
-					<div className="col-6">
+					<div className="col-6 centered">
 						<div>
 							<BlankGrid />
 							<SolutionGrid solution={this.state.solution} />
@@ -149,7 +149,7 @@ class MemoryTiles extends Component {
 					</div>
 					<div className="col-3">
 						<form>
-							<div className="form-group">
+							<div className="form-group cyan">
 								<label>Enter your name:</label>
 								<input className="form-control" id="name" />
 							</div>

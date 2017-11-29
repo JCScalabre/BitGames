@@ -38,10 +38,6 @@
 	display: none;
 }
 
-#header {
-	/*height: 130px;*/
-}
-
 #memorytitle {
 	color: #e6f700;
 	font-family: mexcellent;
@@ -51,4 +47,18 @@
 
 .modal-content {
 	color: black;
+}
+
+.cyan {
+	font-family: 'Jura', sans-serif;
+	text-align: justify;
+	font-size: 140%;
+	font-weight: 800;
+	color: #00c2ff;
+}
+
+#start, #submit {
+	margin: 0 auto;
+	background-color: #00c2ff;
+	border: solid blue 2px;
 }
