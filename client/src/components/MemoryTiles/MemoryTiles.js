@@ -129,6 +129,7 @@ class MemoryTiles extends Component {
 							Try your best to memorize it and recreate it. When you're
 							ready, press Start to begin!
 						</div>
+						<div className="row justify-content-md-center">
 						<button
 							id="start"
 							className="btn btn-success"
@@ -136,6 +137,7 @@ class MemoryTiles extends Component {
 						>
 							Start
 						</button>
+						</div>
 					</div>
 					<div className="col-md-auto">
 						<div>

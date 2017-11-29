@@ -1,6 +1,6 @@
 body {
-	background: url("images/bgstretched.jpg") no-repeat center center fixed;
-	background-size: contain;
+	background: url("images/bg1080.jpg") no-repeat fixed;
+	background-size: cover;
 }
 
 @font-face {

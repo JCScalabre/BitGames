@@ -58,10 +58,14 @@
 }
 
 #start, #submit {
-	margin: 0 auto;
 	background-color: #00c2ff;
 	border: solid grey 0px;
 	font-family: 'Jura', sans-serif;
+}
+
+#start {
+	margin-top: 12px;
+	width: 8%;
 }
 
 .col-6, .col-3 {
