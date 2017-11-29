@@ -27,13 +27,32 @@ class Leaderboard extends Component {
 				<Link to="/memorytiles">
 					<button className="btn btn-primary">Go To Memory Tiles</button>
 				</Link>
-				<br/><br/>
-				<div className="cyan">Leaderboard Table:</div>
-				{this.state.scores.map((score, i) => {
-					return (
-						<div className="cyan" key={i}>Name: {score.name} || Score: {score.score}% || Date: {score.date}</div>
-						)
-				})}
+				<br />
+				<br />
+				<div className="col-6 mx-auto">
+					<table className="cyan table table-hover table-dark">
+						<thead>
+						<tr className="text-center">
+							<th scope="col">Rank</th>
+							<th scope="col">Name</th>
+							<th scope="col">Date</th>
+							<th scope="col">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							{this.state.scores.map((score, i) => {
+								return (
+									<tr key={i} className="text-center">
+										<td>{i + 1}</td>
+										<td>{score.name}</td>
+										<td>{score.date}</td>
+										<td>{score.score}%</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		);
 	}

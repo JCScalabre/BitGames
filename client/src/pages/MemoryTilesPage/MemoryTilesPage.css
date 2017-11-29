@@ -77,3 +77,11 @@
 .col-md-auto {
 	padding: 0px;
 }
+
+.table {
+	background-color: #343a40db;
+}
+
+.table-dark td, .table-dark th, .table-dark thead th {
+    border-color: #00c2ff;
+}
