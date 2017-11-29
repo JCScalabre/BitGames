@@ -1,90 +1,102 @@
-.form-control {
-	width: 60%;
-}
+/*Grid Styling:*/
+	.square {
+		float: left;
+		width: 70px;
+		height: 70px;
+		margin: 6px;
+	}
 
-.square {
-	float: left;
-	width: 70px;
-	height: 70px;
-	margin: 6px;
-}
+	.grid {
+		background-color: #000000cf;
+		height: 410px;
+		width: 410px;
+	}
 
-.grid {
-	background-color: #000000cf;
-	height: 410px;
-	width: 410px;
-}
+	.grey {
+		background-color: grey;
+	}
 
-.btn {
-	border-radius: 4px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-}
+	.green {
+		background-color: #00c2ff;
+	}
 
-#start {
-	position: fixed;
-}
+	#solutiongrid,
+	#usergrid {
+		display: none;
+	}
 
-.grey {
-	background-color: grey
-}
+/*Button Styling:*/
 
-.green {
-	background-color: #00c2ff
-}
+	.btn {
+		border-radius: 4px;
+		margin-right: 10px;
+		margin-bottom: 10px;
+	}
 
-#solutiongrid, #usergrid {
-	display: none;
-}
-
-.title {
-	color: #e6f700;
-	font-family: mexcellent;
-	font-size: 98px;
-	text-align: center;
-}
-
-.modal-content {
-	color: #00c2ff;
-	background-color: #270e39;
-	font-family: 'Jura', sans-serif;
-}
-
-.cyan {
-	font-family: 'Jura', sans-serif;
-	text-align: justify;
-	font-size: 140%;
-	font-weight: 800;
-	color: #00c2ff;
-}
-
-.btn {
+	.btn {
 	background-color: #00c2ff;
 	border: solid grey 0px;
-	font-family: 'Jura', sans-serif;
-}
+	font-family: "Jura", sans-serif;
+	}
 
-.homebtn {
-	font-size: 150%;
-}
+	.homebtn {
+		font-size: 150%;
+	}
 
-#start {
-	margin-top: 12px;
-	width: 7%;
-}
+	#start {
+		margin-top: 12px;
+		width: 7%;
+		position: fixed;
+	}
 
-.col-6, .col-3 {
-	padding: 0px;
-}
+/*Text Styling: */
 
-.col-md-auto {
-	padding: 0px;
-}
+	.title {
+		color: #e6f700;
+		font-family: mexcellent;
+		font-size: 98px;
+		text-align: center;
+	}
 
-.table {
-	background-color: #343a40db;
-}
+	.cyan {
+		font-family: "Jura", sans-serif;
+		text-align: justify;
+		font-size: 140%;
+		font-weight: 800;
+		color: #00c2ff;
+	}
 
-.table-dark td, .table-dark th, .table-dark thead th {
-    border-color: #00c2ff;
-}
+	.form-control {
+	width: 60%;
+	}
+
+/*Modal Styling: */
+
+	.modal-content {
+		color: #00c2ff;
+		background-color: #270e39;
+		font-family: "Jura", sans-serif;
+	}
+
+/*Column Styling: */
+
+	.col-6,
+	.col-3 {
+		padding: 0px;
+	}
+
+	.col-md-auto {
+		padding: 0px;
+	}
+
+/*Table Styling: */
+
+	.table {
+		background-color: #343a40db;
+	}
+
+	.table-dark td,
+	.table-dark th,
+	.table-dark thead th {
+		border-color: #00c2ff;
+	}
