@@ -125,7 +125,7 @@ class MemoryTiles extends Component {
 				<div className="row justify-content-md-center">
 					<div className="col cyan instructions">
 						<div>
-							Instructions: A random pattern will appear for 5 seconds.
+							Instructions: <br/> A random pattern will appear for 5 seconds.
 							Try your best to memorize it and recreate it. When you're
 							ready, press Start to begin!
 						</div>

@@ -68,6 +68,6 @@
 	padding: 0px;
 }
 
-.col-6 {
-	/*max-width: 40%;*/
+.col-md-auto {
+	padding: 0px;
 }
