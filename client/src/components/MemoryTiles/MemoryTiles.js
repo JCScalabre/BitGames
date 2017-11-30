@@ -127,8 +127,8 @@ class MemoryTiles extends Component {
 					<div className="col title">MEMORY TILES</div>
 				</div>
 				<div className="row justify-content-md-center">
-					<div className="col cyan instructions">
-						<div>
+					<div className="col instructions">
+						<div className="cyan">
 							Instructions: <br /> A random pattern will appear for 5
 							seconds. Try your best to memorize it and recreate it. When
 							you're ready, press Start to begin!

@@ -28,15 +28,12 @@
 /*Button Styling:*/
 
 	.btn {
+		font-size: 120%;
+		background-color: #00c2ff;
+		font-family: "Jura", sans-serif;
 		border-radius: 4px;
 		margin-right: 10px;
 		margin-bottom: 10px;
-	}
-
-	.btn {
-	background-color: #00c2ff;
-	border: solid grey 0px;
-	font-family: "Jura", sans-serif;
 	}
 
 	.homebtn {

@@ -15,6 +15,7 @@ class Leaderboard extends Component {
 		this.getScores();
 	}
 
+	// Filter scoresToRender to only contain scores from today:
 	today = () => {
 		var todayArr = [];
 		for (var i = 0; i < this.state.scores.length; i++) {
@@ -25,6 +26,7 @@ class Leaderboard extends Component {
 		this.setState({ scoresToRender: todayArr });
 	};
 
+	// Filter scoresToRender to only contain scores from the past week
 	week = () => {
 		var today = moment();
 		var arr = [];
@@ -38,10 +40,12 @@ class Leaderboard extends Component {
 		this.setState({ scoresToRender: arr });
 	};
 
+	// Set scoresToRender state to all of scores DB
 	alltime = () => {
 		this.setState({ scoresToRender: this.state.scores });
 	};
 
+	// Get scores from DB:
 	getScores = () => {
 		API.getScores().then(res => {
 			this.setState({ scores: res.data });
