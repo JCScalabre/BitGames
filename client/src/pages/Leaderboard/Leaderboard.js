@@ -6,7 +6,8 @@ var today = moment().format("MM DD YY");
 
 class Leaderboard extends Component {
 	state = {
-		scores: []
+		scores: [],
+		scoresToRender: []
 	};
 
 	componentWillMount() {
@@ -14,23 +15,21 @@ class Leaderboard extends Component {
 	}
 
 	today = () => {
-		var date1 = this.state.scores[0].date
-		date1 = moment(date1).format("MM DD YY")
-		console.log(today)
-		console.log(date1)
-		if (today === date1) {
-			console.log("That is today")
+		var todayArr = [];
+		for (var i = 0; i < this.state.scores.length; i++) {
+			if (moment(this.state.scores[i].date).format("MM DD YY") === today) {
+				todayArr.push(this.state.scores[i])
+			}
 		}
+		this.setState({ scores: todayArr })
+	}
+
+	thisweek = () => {
+
 	}
 
 	getScores = () => {
 		API.getScores().then(res => {
-			// This for loop formats our date
-			// for (var i = 0; i < res.data.length; i++) {
-			// 	res.data[i].date = moment(res.data[i].date).format(
-			// 		"MM/DD/YY - h:mma"
-			// 	);
-			// }
 			this.setState({ scores: res.data });
 		});
 	};
