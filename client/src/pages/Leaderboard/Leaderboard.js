@@ -19,20 +19,28 @@ class Leaderboard extends Component {
 		var todayArr = [];
 		for (var i = 0; i < this.state.scores.length; i++) {
 			if (moment(this.state.scores[i].date).format("MM DD YY") === today) {
-				todayArr.push(this.state.scores[i])
+				todayArr.push(this.state.scores[i]);
 			}
 		}
-		this.setState({ scoresToRender: todayArr })
-	}
+		this.setState({ scoresToRender: todayArr });
+	};
 
-	thisweek = () => {
-		
-	}
+	week = () => {
+		var today = moment();
+		var arr = [];
+		for (var i = 0; i < this.state.scores.length; i++) {
+			var b = moment(this.state.scores[i].date);
+			var diff = today.diff(b, "days");
+			if (diff <= 7) {
+				arr.push(this.state.scores[i]);
+			}
+		}
+		this.setState({ scoresToRender: arr });
+	};
 
 	alltime = () => {
-		var allTime = [];
-		this.setState({ scoresToRender: this.state.scores })
-	}
+		this.setState({ scoresToRender: this.state.scores });
+	};
 
 	getScores = () => {
 		API.getScores().then(res => {
@@ -47,20 +55,20 @@ class Leaderboard extends Component {
 				<div className="title">Leaderboard</div>
 				<div className="col text-center">
 					<div className="btn-group" data-toggle="buttons">
-						<label onClick={this.today} className="btn group btn-primary active">
-							<input
-								type="radio"
-							/>Today
+						<label
+							onClick={this.today}
+							className="btn group btn-primary active"
+						>
+							<input type="radio" />Today
 						</label>
-						<label className="btn group btn-primary">
-							<input
-								type="radio"
-							/>This Week
+						<label onClick={this.week} className="btn group btn-primary">
+							<input type="radio" />This Week
 						</label>
-						<label onClick={this.alltime} className="btn group btn-primary">
-							<input
-								type="radio"
-							/>All Time
+						<label
+							onClick={this.alltime}
+							className="btn group btn-primary"
+						>
+							<input type="radio" />All Time
 						</label>
 					</div>
 				</div>
@@ -81,7 +89,9 @@ class Leaderboard extends Component {
 									<tr key={i} className="text-center">
 										<td>{i + 1}</td>
 										<td>{data.name}</td>
-										<td>{moment(data.date).format("MM/DD/YY - h:mma")}</td>
+										<td>
+											{moment(data.date).format("MM/DD/YY - h:mma")}
+										</td>
 										<td>{data.score}%</td>
 									</tr>
 								);

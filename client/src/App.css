@@ -1,6 +1,7 @@
 body {
 	background: url("images/bg1080.jpg") no-repeat fixed;
 	background-size: cover;
+	/*overflow: hidden;*/
 }
 
 @font-face {
