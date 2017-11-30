@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
+import moment from "moment";
 
 class Leaderboard extends Component {
 	state = {
@@ -13,6 +14,9 @@ class Leaderboard extends Component {
 
 	getScores = () => {
 		API.getScores().then(res => {
+			for (var i = 0; i < res.data.length; i++) {
+				res.data[i].date = moment(res.data[i].date).format("MM/DD/YY - h:mma")
+			}
 			this.setState({ scores: res.data });
 		});
 	};
