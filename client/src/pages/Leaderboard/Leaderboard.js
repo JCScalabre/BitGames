@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import moment from "moment";
+
 var today = moment().format("MM DD YY");
 
 class Leaderboard extends Component {
@@ -21,16 +22,22 @@ class Leaderboard extends Component {
 				todayArr.push(this.state.scores[i])
 			}
 		}
-		this.setState({ scores: todayArr })
+		this.setState({ scoresToRender: todayArr })
 	}
 
 	thisweek = () => {
+		
+	}
 
+	alltime = () => {
+		var allTime = [];
+		this.setState({ scoresToRender: this.state.scores })
 	}
 
 	getScores = () => {
 		API.getScores().then(res => {
 			this.setState({ scores: res.data });
+			this.today();
 		});
 	};
 
@@ -40,17 +47,17 @@ class Leaderboard extends Component {
 				<div className="title">Leaderboard</div>
 				<div className="col text-center">
 					<div className="btn-group" data-toggle="buttons">
-						<label onClick={this.today} className="btn group btn-primary">
+						<label onClick={this.today} className="btn group btn-primary active">
 							<input
 								type="radio"
 							/>Today
 						</label>
-						<label className="btn group btn-primary active">
+						<label className="btn group btn-primary">
 							<input
 								type="radio"
 							/>This Week
 						</label>
-						<label className="btn group btn-primary">
+						<label onClick={this.alltime} className="btn group btn-primary">
 							<input
 								type="radio"
 							/>All Time
@@ -69,7 +76,7 @@ class Leaderboard extends Component {
 							</tr>
 						</thead>
 						<tbody>
-							{this.state.scores.map((data, i) => {
+							{this.state.scoresToRender.map((data, i) => {
 								return (
 									<tr key={i} className="text-center">
 										<td>{i + 1}</td>
