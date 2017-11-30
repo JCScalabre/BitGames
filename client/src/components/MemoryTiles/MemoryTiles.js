@@ -165,7 +165,7 @@ class MemoryTiles extends Component {
 							<div className="form-group cyan">
 								<label>Enter your name:</label>
 								<p id="leaveblank">(or leave blank to submit your score anonymously)</p>
-								<input className="form-control" id="name" />
+								<input autoComplete="off" className="form-control" id="name" />
 							</div>
 						</form>
 						<button

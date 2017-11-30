@@ -53,6 +53,10 @@
 		display: none;
 	}
 
+	.group {
+		margin: 0;
+	}
+
 /*Text Styling: */
 
 	.title {
