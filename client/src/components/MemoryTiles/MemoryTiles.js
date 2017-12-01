@@ -100,6 +100,13 @@ class MemoryTiles extends Component {
 		}
 	};
 
+	handleSubmit = event => {
+		event.preventDefault();
+		if (gameisrunning) {
+			console.log("Form submitted");
+		}
+	};
+
 	// When the submit button is pressed:
 	submit = event => {
 		event.preventDefault();
@@ -161,22 +168,27 @@ class MemoryTiles extends Component {
 						</Link>
 					</div>
 					<div className="col">
-						<form>
+						<form onSubmit={this.handleSubmit}>
 							<div className="form-group cyan">
 								<label>Enter your name:</label>
-								<p id="leaveblank">(or leave blank to submit your score anonymously)</p>
-								<input autoComplete="off" className="form-control" id="name" />
+								<p id="leaveblank">
+									(or leave blank to submit your score anonymously)
+								</p>
+								<input
+									autoComplete="off"
+									className="form-control"
+									id="name"
+									type="text"
+								/>
 							</div>
+							<button
+								id="submit"
+								type="submit"
+								className="btn btn-primary"
+							>
+								Submit
+							</button>
 						</form>
-						<button
-							id="submit"
-							className="btn btn-primary"
-							data-toggle="modal"
-							data-target="#testmodal"
-							onClick={this.submit}
-						>
-							Submit
-						</button>
 					</div>
 				</div>
 				<Modal result={this.state.result} />
