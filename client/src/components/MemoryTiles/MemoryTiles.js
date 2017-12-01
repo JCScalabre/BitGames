@@ -3,13 +3,14 @@ import $ from "jquery";
 import BlankGrid from "./BlankGrid";
 import SolutionGrid from "./SolutionGrid";
 import UserGrid from "./UserGrid";
-import Modal from "../Modal";
+import Modal from "react-responsive-modal";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 
 const grey = "rgb(80, 80, 80)";
 const cyan = "rgb(0, 194, 255)";
 let gameisrunning = false;
+let canbesubmitted = false;
 
 class MemoryTiles extends Component {
 	state = {
@@ -40,7 +41,8 @@ class MemoryTiles extends Component {
 			0,
 			0
 		],
-		grid: []
+		grid: [],
+		modalIsOpen: false
 	};
 
 	componentWillMount() {
@@ -87,23 +89,39 @@ class MemoryTiles extends Component {
 
 	// When the start button is pressed:
 	start = event => {
+		event.preventDefault();
 		if (gameisrunning === false) {
 			gameisrunning = true;
-			event.preventDefault();
 			$("#blankgrid").css("display", "none");
 			$("#solutiongrid").css("display", "block");
-			$("#submit").css("display", "block");
 			setTimeout(function() {
+				canbesubmitted = true;
 				$("#solutiongrid").css("display", "none");
 				$("#usergrid").css("display", "block");
 			}, 5000);
 		}
 	};
 
+	// When the form is submitted:
 	handleSubmit = event => {
 		event.preventDefault();
-		if (gameisrunning) {
-			console.log("Form submitted");
+		if (canbesubmitted) {
+			var result = 0;
+			var name = $("#name").val();
+			if (name === "") {
+				name = "Anonymous";
+			}
+			for (var i = 0; i < this.state.solution.length; i++) {
+				if (this.state.solution[i] === this.state.grid[i]) {
+					result++;
+				}
+			}
+			var objToSendToDB = {};
+			objToSendToDB.name = name;
+			objToSendToDB.score = result * 100 / 25;
+			API.submitScore(objToSendToDB);
+			this.setState({ result: result });
+			this.openModal();
 		}
 	};
 
@@ -125,6 +143,18 @@ class MemoryTiles extends Component {
 		objToSendToDB.score = result * 100 / 25;
 		API.submitScore(objToSendToDB);
 		this.setState({ result: result });
+	};
+
+	openModal = () => {
+		this.setState({ modalIsOpen: true });
+	};
+
+	closeModal = () => {
+		gameisrunning = false;
+		canbesubmitted = false;
+		$("#blankgrid").css("display", "block");
+		$("#usergrid").css("display", "none");
+		this.setState({ modalIsOpen: false });
 	};
 
 	render() {
@@ -181,17 +211,37 @@ class MemoryTiles extends Component {
 									type="text"
 								/>
 							</div>
-							<button
-								id="submit"
-								type="submit"
-								className="btn btn-primary"
-							>
+							<button type="submit" className="btn btn-primary">
 								Submit
 							</button>
 						</form>
 					</div>
 				</div>
-				<Modal result={this.state.result} />
+				<Modal
+					open={this.state.modalIsOpen}
+					little
+					showCloseIcon={false}
+					closeOnEsc={false}
+					closeOnOverlayClick={false}
+					onClose={this.closeModal}
+					classNames={{ modal: "modal-content" }}
+				>
+					<h2>Congrats!</h2>
+					<p>
+						You scored {this.state.result * 100 / 25}% ({this.state.result}{" "}
+						out of 25 correct).
+					</p>
+					<div className="row">
+					<button onClick={this.closeModal} className="btn btn-primary">
+						Play Again
+					</button>
+					<Link to="/leaderboard">
+						<button onClick={this.closeModal} className="btn btn-primary">
+							View Leaderboard
+						</button>
+					</Link>
+					</div>
+				</Modal>
 			</div>
 		);
 	}

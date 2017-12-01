@@ -45,10 +45,6 @@
 		width: 25%;
 	}
 
-	#submit {
-		/*display: none;*/
-	}
-
 	.group {
 		margin: 0;
 	}
@@ -86,10 +82,15 @@
 
 	.modal-content {
 		color: #00c2ff;
-		background-color: #270e39;
+		background: #270e39 !important;
 		font-family: "Jura", sans-serif;
+		padding: 19px 41px !important;
+		width: 500px;
 	}
-
+	
+	.modal-content .row {
+		justify-content: flex-end;
+	}
 /*Column Styling: */
 
 	.col-6,
