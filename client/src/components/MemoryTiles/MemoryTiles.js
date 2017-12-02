@@ -9,8 +9,6 @@ import { Link } from "react-router-dom";
 
 const grey = "rgb(80, 80, 80)";
 const cyan = "rgb(0, 194, 255)";
-let gameisrunning = false;
-let canbesubmitted = false;
 
 class MemoryTiles extends Component {
 	state = {
@@ -42,7 +40,9 @@ class MemoryTiles extends Component {
 			0
 		],
 		grid: [],
-		modalIsOpen: false
+		modalIsOpen: false,
+		gameisrunning: false,
+		canbesubmitted: false
 	};
 
 	componentWillMount() {
@@ -90,22 +90,24 @@ class MemoryTiles extends Component {
 	// When the start button is pressed:
 	start = event => {
 		event.preventDefault();
-		if (gameisrunning === false) {
-			gameisrunning = true;
+		if (this.state.gameisrunning === false) {
+			this.setState({ gameisrunning: true });
 			$("#blankgrid").css("display", "none");
 			$("#solutiongrid").css("display", "block");
-			setTimeout(function() {
-				canbesubmitted = true;
-				$("#solutiongrid").css("display", "none");
-				$("#usergrid").css("display", "block");
-			}, 5000);
+			setTimeout(this.timeup, 5000);
 		}
+	};
+
+	timeup = () => {
+		this.setState({ canbesubmitted: true });
+		$("#solutiongrid").css("display", "none");
+		$("#usergrid").css("display", "block");
 	};
 
 	// When the form is submitted:
 	handleSubmit = event => {
 		event.preventDefault();
-		if (canbesubmitted) {
+		if (this.state.canbesubmitted) {
 			var result = 0;
 			var name = $("#name").val();
 			if (name === "") {
@@ -145,16 +147,22 @@ class MemoryTiles extends Component {
 		this.setState({ result: result });
 	};
 
+	reset = () => {
+		this.shuffle(this.state.solution);
+		this.setState({ gameisrunning: false });
+		this.setState({ canbesubmitted: false });
+		$("#blankgrid").css("display", "block");
+		$("#usergrid").css("display", "none");
+		$(".usersquare").css("background-color", grey);
+	};
+
 	openModal = () => {
 		this.setState({ modalIsOpen: true });
 	};
 
 	closeModal = () => {
-		gameisrunning = false;
-		canbesubmitted = false;
-		$("#blankgrid").css("display", "block");
-		$("#usergrid").css("display", "none");
 		this.setState({ modalIsOpen: false });
+		this.reset();
 	};
 
 	render() {
@@ -228,18 +236,23 @@ class MemoryTiles extends Component {
 				>
 					<h2>Congrats!</h2>
 					<p>
-						You scored {this.state.result * 100 / 25}% ({this.state.result}{" "}
+						You scored {this.state.result * 100 / 25}% ({
+							this.state.result
+						}{" "}
 						out of 25 correct).
 					</p>
 					<div className="row">
-					<button onClick={this.closeModal} className="btn btn-primary">
-						Play Again
-					</button>
-					<Link to="/leaderboard">
 						<button onClick={this.closeModal} className="btn btn-primary">
-							View Leaderboard
+							Play Again
 						</button>
-					</Link>
+						<Link to="/leaderboard">
+							<button
+								onClick={this.closeModal}
+								className="btn btn-primary"
+							>
+								View Leaderboard
+							</button>
+						</Link>
 					</div>
 				</Modal>
 			</div>

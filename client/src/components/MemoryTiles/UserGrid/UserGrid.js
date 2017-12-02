@@ -6,7 +6,7 @@ const UserGrid = props => (
 			{props.grid.map((number, i) => {
 				return (
 					<div
-						className="grey square"
+						className="grey usersquare square"
 						tilenumber={i}
 						key={i}
 						onClick={props.changecolor}
