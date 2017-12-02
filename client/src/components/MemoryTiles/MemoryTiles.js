@@ -147,6 +147,7 @@ class MemoryTiles extends Component {
 		this.setState({ result: result });
 	};
 
+	// Reset our game :
 	reset = () => {
 		this.shuffle(this.state.solution);
 		this.setState({ gameisrunning: false });
