@@ -61,6 +61,7 @@ class Chat extends Component {
 
 	closeModal = () => {
 		this.setState({ modalIsOpen: false });
+		$("#message").focus();
 	};
 
 	render() {
