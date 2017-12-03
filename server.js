@@ -4,7 +4,9 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const db = require("./models")
+const db = require("./models");
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 
 // Configure body parser for AJAX requests
@@ -46,12 +48,31 @@ app.get("/api/scores", (req, res) => {
 	.then(scores => res.json(scores))
 })
 
+app.get("/flappybird", (req, res) => {
+	res.sendFile(__dirname + "/flappybird.html")
+})
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on("test", function(name) {
+  	console.log("name: " + name)
+  })
+  socket.on("score", function(score) {
+  	console.log(score)
+  	io.emit("score", score)
+  })
+});
+
 // Send every request to the React app
 // Define any API routes before this runs
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(PORT, function() {
+// app.listen(PORT, function() {
+//   console.log(`🌎 ==> Server now on port ${PORT}!`);
+// });
+
+http.listen(PORT, function(){
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

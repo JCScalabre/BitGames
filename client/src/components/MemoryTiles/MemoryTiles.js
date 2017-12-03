@@ -107,7 +107,7 @@ class MemoryTiles extends Component {
 	// When the form is submitted:
 	handleSubmit = event => {
 		event.preventDefault();
-		if (this.state.canbesubmitted) {
+		// if (this.state.canbesubmitted) {
 			var result = 0;
 			var name = $("#name").val();
 			if (name === "") {
@@ -121,30 +121,11 @@ class MemoryTiles extends Component {
 			var objToSendToDB = {};
 			objToSendToDB.name = name;
 			objToSendToDB.score = result * 100 / 25;
-			API.submitScore(objToSendToDB);
+			// API.submitScore(objToSendToDB);
 			this.setState({ result: result });
-			this.openModal();
-		}
-	};
-
-	// When the submit button is pressed:
-	submit = event => {
-		event.preventDefault();
-		var result = 0;
-		var name = $("#name").val();
-		if (name === "") {
-			name = "Anonymous";
-		}
-		for (var i = 0; i < this.state.solution.length; i++) {
-			if (this.state.solution[i] === this.state.grid[i]) {
-				result++;
-			}
-		}
-		var objToSendToDB = {};
-		objToSendToDB.name = name;
-		objToSendToDB.score = result * 100 / 25;
-		API.submitScore(objToSendToDB);
-		this.setState({ result: result });
+			// this.openModal();
+			// socket.emit("score", objToSendToDB)
+		// }
 	};
 
 	// Reset our game :
