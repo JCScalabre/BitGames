@@ -23,6 +23,7 @@
 	width: 50%;
 	height: 400px;
 	padding: 0px;
+	padding-bottom: 5px;
 	overflow: auto;
 }
 
@@ -51,4 +52,14 @@
 	font-weight: 800;
 	color: #00c2ff;
 	margin-left: 10px;
+	margin-right: 10px;
+}
+
+
+.form-control:focus {
+	box-shadow: none;
+}
+
+.active {
+	box-shadow: none !important;
 }

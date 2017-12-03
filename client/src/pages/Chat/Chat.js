@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import $ from "jquery";
 // import { Link } from "react-router-dom";
 // import API from "../../utils/API";
-// import moment from "moment";
+import moment from "moment";
 import Modal from "react-responsive-modal";
 import "./Chat.css";
 
@@ -20,9 +20,10 @@ class Chat extends Component {
 
 	componentDidMount() {
 		socket.on("message", message => {
+			var time = message.time;
 			var contents = message.message;
 			var name = message.name;
-			var messagetoappend = `<div class='chatmsg'> ${name}: ${
+			var messagetoappend = `<div class='chatmsg'> [${time}] ${name}: ${
 				contents
 			} </div>`;
 			$("#chatbg").append(messagetoappend);
@@ -34,7 +35,11 @@ class Chat extends Component {
 	handleNameSubmit = event => {
 		event.preventDefault();
 		this.closeModal();
-		this.setState({ name: $("#chatname").val() });
+		if ($("#chatname").val() === "") {
+			this.setState({ name: "Anonymous" });
+		} else {
+			this.setState({ name: $("#chatname").val() });
+		}
 	};
 
 	handleMsgSubmit = event => {
@@ -43,7 +48,10 @@ class Chat extends Component {
 		let ObjToEmit = {};
 		ObjToEmit.name = this.state.name;
 		ObjToEmit.message = $("#message").val();
-		socket.emit("message", ObjToEmit);
+		ObjToEmit.time = moment().format("h:mm A");
+		if (ObjToEmit.message !== "") {
+			socket.emit("message", ObjToEmit);
+		}
 		$("#message").val("");
 	};
 
@@ -60,8 +68,7 @@ class Chat extends Component {
 			<div>
 				<div className="title">Chat</div>
 				<div className="container">
-					<div id="chatbg" className="col">
-					</div>
+					<div id="chatbg" className="col" />
 					<div id="messagebar" className="col cyan">
 						<form onSubmit={this.handleMsgSubmit}>
 							<div className="input-group">
