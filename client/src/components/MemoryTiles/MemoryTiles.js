@@ -4,7 +4,7 @@ import BlankGrid from "./BlankGrid";
 import SolutionGrid from "./SolutionGrid";
 import UserGrid from "./UserGrid";
 import Modal from "react-responsive-modal";
-import API from "../../utils/API";
+// import API from "../../utils/API";
 import { Link } from "react-router-dom";
 
 const grey = "rgb(80, 80, 80)";

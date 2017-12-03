@@ -55,11 +55,12 @@ app.get("/flappybird", (req, res) => {
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on("test", function(name) {
-  	console.log("name: " + name)
   })
   socket.on("score", function(score) {
-  	console.log(score)
   	io.emit("score", score)
+  })
+  socket.on("message", function(message) {
+    io.emit("message", message)
   })
 });
 

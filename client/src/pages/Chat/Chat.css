@@ -1,0 +1,54 @@
+#chatnamebtn {
+	margin: 0;
+	font-size: 20px;
+}
+
+#nameinput {
+	width: 300px;
+	margin: 0 auto;
+	margin-top: 15px;
+}
+
+.name-modal {
+	color: #00c2ff;
+	background: #270e39 !important;
+	font-family: "Jura", sans-serif;
+	padding: 10px 24px 18px !important;
+}
+
+#chatbg {
+	background-color: black;
+	opacity: 0.8;
+	margin: 0 auto;
+	width: 50%;
+	height: 400px;
+	padding: 0px;
+	overflow: auto;
+}
+
+#messagebar {
+	width: 50%;
+	margin: 0 auto;
+	padding: 0px;
+}
+
+#message {
+	border-radius: 0px;
+	opacity: 1;
+}
+
+#messagesend {
+	margin: 0;
+	font-size: 20px;
+	border-radius: 0;
+	opacity: 1;
+}
+
+.chatmsg {
+	font-family: "Jura", sans-serif;
+	text-align: justify;
+	font-size: 140%;
+	font-weight: 800;
+	color: #00c2ff;
+	margin-left: 10px;
+}
