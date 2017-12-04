@@ -4,9 +4,9 @@ import BlankGrid from "./BlankGrid";
 import SolutionGrid from "./SolutionGrid";
 import UserGrid from "./UserGrid";
 import Modal from "react-responsive-modal";
-// import API from "../../utils/API";
+import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import Countdown from "react-countdown-now";
+// import Countdown from "react-countdown-now";
 
 const grey = "rgb(80, 80, 80)";
 const cyan = "rgb(0, 194, 255)";
@@ -95,10 +95,10 @@ class MemoryTiles extends Component {
 		var timerId = setInterval(function() {
 			time--;
 			that.setState({ timeremaining: time });
+			if (time === 0) {
+				clearInterval(timerId);
+			}
 		}, 1000);
-		if (time === 0) {
-			clearInterval(timerId);
-		}
 	};
 
 	// When the start button is pressed:
@@ -122,30 +122,30 @@ class MemoryTiles extends Component {
 	// When the form is submitted:
 	handleSubmit = event => {
 		event.preventDefault();
-		// if (this.state.canbesubmitted) {
-		var result = 0;
-		var name = $("#name").val();
-		if (name === "") {
-			name = "Anonymous";
-		}
-		for (var i = 0; i < this.state.solution.length; i++) {
-			if (this.state.solution[i] === this.state.grid[i]) {
-				result++;
+		if (this.state.canbesubmitted) {
+			var result = 0;
+			var name = $("#name").val();
+			if (name === "") {
+				name = "Anonymous";
 			}
+			for (var i = 0; i < this.state.solution.length; i++) {
+				if (this.state.solution[i] === this.state.grid[i]) {
+					result++;
+				}
+			}
+			var objToSendToDB = {};
+			objToSendToDB.name = name;
+			objToSendToDB.score = result * 100 / 25;
+			API.submitScore(objToSendToDB);
+			this.setState({ result: result });
+			this.openModal();
 		}
-		var objToSendToDB = {};
-		objToSendToDB.name = name;
-		objToSendToDB.score = result * 100 / 25;
-		// API.submitScore(objToSendToDB);
-		this.setState({ result: result });
-		// this.openModal();
-		// socket.emit("score", objToSendToDB)
-		// }
 	};
 
 	// Reset our game :
 	reset = () => {
 		this.shuffle(this.state.solution);
+		this.setState({ timeremaining: 5 })
 		this.setState({ gameisrunning: false });
 		this.setState({ canbesubmitted: false });
 		$("#blankgrid").css("display", "block");
@@ -186,6 +186,10 @@ class MemoryTiles extends Component {
 						</div>
 						<div className="row justify-content-md-center">
 							<div className="cyan">
+								<i
+									className="fa fa-hourglass-half"
+									aria-hidden="true"
+								/>
 								Time remaining:{" "}
 								<span id="timeremaining">
 									{this.state.timeremaining}
