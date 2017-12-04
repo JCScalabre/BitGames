@@ -6,6 +6,7 @@ import UserGrid from "./UserGrid";
 import Modal from "react-responsive-modal";
 // import API from "../../utils/API";
 import { Link } from "react-router-dom";
+import Countdown from "react-countdown-now";
 
 const grey = "rgb(80, 80, 80)";
 const cyan = "rgb(0, 194, 255)";
@@ -42,7 +43,8 @@ class MemoryTiles extends Component {
 		grid: [],
 		modalIsOpen: false,
 		gameisrunning: false,
-		canbesubmitted: false
+		canbesubmitted: false,
+		timeremaining: 5
 	};
 
 	componentWillMount() {
@@ -87,10 +89,23 @@ class MemoryTiles extends Component {
 		}
 	};
 
+	timeremaining = () => {
+		var that = this;
+		var time = this.state.timeremaining;
+		var timerId = setInterval(function() {
+			time--;
+			that.setState({ timeremaining: time });
+		}, 1000);
+		if (time === 0) {
+			clearInterval(timerId);
+		}
+	};
+
 	// When the start button is pressed:
 	start = event => {
 		event.preventDefault();
 		if (this.state.gameisrunning === false) {
+			this.timeremaining();
 			this.setState({ gameisrunning: true });
 			$("#blankgrid").css("display", "none");
 			$("#solutiongrid").css("display", "block");
@@ -108,23 +123,23 @@ class MemoryTiles extends Component {
 	handleSubmit = event => {
 		event.preventDefault();
 		// if (this.state.canbesubmitted) {
-			var result = 0;
-			var name = $("#name").val();
-			if (name === "") {
-				name = "Anonymous";
+		var result = 0;
+		var name = $("#name").val();
+		if (name === "") {
+			name = "Anonymous";
+		}
+		for (var i = 0; i < this.state.solution.length; i++) {
+			if (this.state.solution[i] === this.state.grid[i]) {
+				result++;
 			}
-			for (var i = 0; i < this.state.solution.length; i++) {
-				if (this.state.solution[i] === this.state.grid[i]) {
-					result++;
-				}
-			}
-			var objToSendToDB = {};
-			objToSendToDB.name = name;
-			objToSendToDB.score = result * 100 / 25;
-			// API.submitScore(objToSendToDB);
-			this.setState({ result: result });
-			// this.openModal();
-			// socket.emit("score", objToSendToDB)
+		}
+		var objToSendToDB = {};
+		objToSendToDB.name = name;
+		objToSendToDB.score = result * 100 / 25;
+		// API.submitScore(objToSendToDB);
+		this.setState({ result: result });
+		// this.openModal();
+		// socket.emit("score", objToSendToDB)
 		// }
 	};
 
@@ -169,6 +184,14 @@ class MemoryTiles extends Component {
 								Start
 							</button>
 						</div>
+						<div className="row justify-content-md-center">
+							<div className="cyan">
+								Time remaining:{" "}
+								<span id="timeremaining">
+									{this.state.timeremaining}
+								</span>
+							</div>
+						</div>
 					</div>
 					<div className="col-md-auto text-center">
 						<BlankGrid />
@@ -179,11 +202,19 @@ class MemoryTiles extends Component {
 						/>
 						<br />
 						<Link to="/">
-							<button className="btn btn-primary">Home</button>
+							<button className="btn btn-primary">
+								<i className="fa fa-home" aria-hidden="true" />Home
+							</button>
+						</Link>
+						<Link to="/chat">
+							<button className="btn btn-primary">
+								<i className="fa fa-comments" aria-hidden="true" />
+								Chat
+							</button>
 						</Link>
 						<Link to="/leaderboard">
 							<button className="btn btn-primary">
-								View Leaderboard
+								<i className="fa fa-star" aria-hidden="true" />Leaderboard
 							</button>
 						</Link>
 					</div>

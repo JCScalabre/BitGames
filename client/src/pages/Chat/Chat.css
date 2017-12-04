@@ -20,7 +20,6 @@
 	background-color: black;
 	opacity: 0.8;
 	margin: 0 auto;
-	width: 50%;
 	height: 400px;
 	padding: 0px;
 	padding-bottom: 5px;
@@ -28,7 +27,6 @@
 }
 
 #messagebar {
-	width: 50%;
 	margin: 0 auto;
 	padding: 0px;
 }
@@ -38,7 +36,7 @@
 	opacity: 1;
 }
 
-#messagesend {
+.messagesend {
 	margin: 0;
 	font-size: 20px;
 	border-radius: 0;
@@ -55,6 +53,9 @@
 	margin-right: 10px;
 }
 
+.fa {
+	margin-right: 6px;
+}
 
 .form-control:focus {
 	box-shadow: none;

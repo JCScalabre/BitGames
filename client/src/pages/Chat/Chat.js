@@ -5,6 +5,7 @@ import $ from "jquery";
 import moment from "moment";
 import Modal from "react-responsive-modal";
 import "./Chat.css";
+import { Link } from "react-router-dom";
 
 const io = require("socket.io-client");
 const socket = io();
@@ -69,27 +70,44 @@ class Chat extends Component {
 			<div>
 				<div className="title">Chat</div>
 				<div className="container">
-					<div id="chatbg" className="col" />
-					<div id="messagebar" className="col cyan">
-						<form onSubmit={this.handleMsgSubmit}>
-							<div className="input-group">
-								<input
-									autoComplete="off"
-									className="form-control"
-									id="message"
-									type="text"
-								/>
-								<span className="input-group-btn">
-									<button
-										id="messagesend"
-										className="btn btn-primary"
-										type="submit"
-									>
-										Send
-									</button>
-								</span>
+					<div className="row">
+						<div className="col text-center">
+							<Link to="/memorytiles">
+								<button id="back" className="btn btn-primary">
+									<i className="fa fa-arrow-left" aria-hidden="true" />
+									Back to Game
+								</button>
+							</Link>
+						</div>
+						<div className="col-6">
+							<div id="chatbg" />
+							<div id="messagebar" className="col cyan">
+								<form onSubmit={this.handleMsgSubmit}>
+									<div className="input-group">
+										<input
+											autoComplete="off"
+											className="form-control"
+											id="message"
+											type="text"
+										/>
+										<span className="input-group-btn">
+											<button
+												className="btn btn-primary messagesend"
+												type="submit"
+											>
+												Send{" "}
+												<i
+													className="fa fa-arrow-circle-up"
+													aria-hidden="true"
+												/>
+											</button>
+										</span>
+									</div>
+								</form>
 							</div>
-						</form>
+						</div>
+						<div className="col">
+						</div>
 					</div>
 				</div>
 				<Modal

@@ -1878,6 +1878,10 @@ react-countdown-clock@^2.0.0:
     create-react-class "^15.5.2"
     prop-types "^15.5.8"
 
+react-countdown-now@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-countdown-now/-/react-countdown-now-1.2.0.tgz#9875c6634330e6c400fc829798358cbfa9aac77f"
+
 react-dom@^16.1.1:
   version "16.1.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.1.1.tgz#b2e331b6d752faf1a2d31399969399a41d8d45f8"

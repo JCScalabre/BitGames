@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import moment from "moment";
 
-// const io = require('socket.io-client');  
-// const socket = io(); 
-
 var today = moment().format("MM DD YY");
 
 class Leaderboard extends Component {
@@ -16,16 +13,6 @@ class Leaderboard extends Component {
 
 	componentWillMount() {
 		this.getScores();
-	}
-
-	componentDidMount() {
-		// socket.on("score", function(score) {
-		// 	console.log(score)
-		// })
-	}
-
-	test = () => {
-		// socket.emit("score", "Test")
 	}
 
 	// Filter scoresToRender to only contain scores from today:
@@ -70,7 +57,6 @@ class Leaderboard extends Component {
 		return (
 			<div>
 				<div className="title">Leaderboard</div>
-				<button onClick={this.test}>Test</button>
 				<div className="col text-center">
 					<div className="btn-group" data-toggle="buttons">
 						<label
