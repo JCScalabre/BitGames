@@ -54,16 +54,34 @@ app.get("/flappybird", (req, res) => {
 
 io.on('connection', function(socket){
   console.log('a user connected');
-  socket.on("test", function(name) {
-  	console.log("name: " + name)
-  })
+  socket.on('disconnect', function(){
+    // console.log('user disconnected');
+    console.log(this.id + " has disconnected.");
+  });
+  // socket.on("test", function(name) {
+  // 	console.log("name: " + name)
+  // })
+
+  // When the user submits a score: 
   socket.on("score", function(score) {
   	console.log(score)
   	io.emit("score", score)
   })
+
+  // When a user sends a message to the chat: 
   socket.on("message", function(message) {
     console.log(message)
     io.emit("message", message)
+  })
+
+  // When a user connects to the chat:
+  socket.on("hasconnected", function(name) {
+    console.log(name + " has just connected!")
+    io.emit("hasconnected", name)
+  })
+  socket.on("hasdisconnected", function(name) {
+    console.log(name + " has disconnected");
+    io.emit("hasdisconnected", name)
   })
 });
 

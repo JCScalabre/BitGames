@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import $ from "jquery";
-// import { Link } from "react-router-dom";
 // import API from "../../utils/API";
 import moment from "moment";
 import Modal from "react-responsive-modal";
 import "./Chat.css";
 import { Link } from "react-router-dom";
-
-const io = require("socket.io-client");
-const socket = io();
-
-// var today = moment().format("MM DD YY");
+import socket from "../../components/Socket/Socket.js";
+var hasconnectedbefore = false;
 
 class Chat extends Component {
 	state = {
@@ -20,17 +16,27 @@ class Chat extends Component {
 	componentWillMount() {}
 
 	componentDidMount() {
-		socket.on("message", message => {
-			var time = message.time;
-			var contents = message.message;
-			var name = message.name;
-			var messagetoappend = `<div class='chatmsg'> [${time}] ${name}: ${
-				contents
-			} </div>`;
-			$("#chatbg").append(messagetoappend);
-			var scrollHeight = $("#chatbg")[0].scrollHeight;
-			$("#chatbg").scrollTop(scrollHeight);
-		});
+		if (hasconnectedbefore === false) {
+			socket.on("message", message => {
+				var time = message.time;
+				var contents = message.message;
+				var name = message.name;
+				var messagetoappend = `<div class='chatmsg'> [${time}] ${name}: ${contents} </div>`;
+				$("#chatbg").append(messagetoappend);
+				var scrollHeight = $("#chatbg")[0].scrollHeight;
+				$("#chatbg").scrollTop(scrollHeight);
+			});
+			socket.on("hasconnected", name => {
+				console.log(name + " has just connected!");
+				var nametoappend = `<div class='servermsg'>${name} has just connected!</div>`;
+				$("#chatbg").append(nametoappend);
+			});
+			socket.on("hasdisconnected", name => {
+				var nametoappend = `<div class='servermsgred'>${name} has disconnected.</div>`;
+				$("#chatbg").append(nametoappend)
+			})
+			hasconnectedbefore = true;
+		}
 	}
 
 	handleNameSubmit = event => {
@@ -40,6 +46,7 @@ class Chat extends Component {
 			this.setState({ name: "Anonymous" });
 		} else {
 			this.setState({ name: $("#chatname").val() });
+			socket.emit("hasconnected", $("#chatname").val());
 		}
 	};
 
@@ -54,6 +61,11 @@ class Chat extends Component {
 			socket.emit("message", ObjToEmit);
 		}
 		$("#message").val("");
+	};
+
+	back = event => {
+		// event.preventDefault();
+		socket.emit("hasdisconnected", this.state.name);
 	};
 
 	openModal = () => {
@@ -73,7 +85,11 @@ class Chat extends Component {
 					<div className="row">
 						<div className="col text-center">
 							<Link to="/memorytiles">
-								<button id="back" className="btn btn-primary">
+								<button
+									id="back"
+									onClick={this.back}
+									className="btn btn-primary"
+								>
 									<i className="fa fa-arrow-left" aria-hidden="true" />
 									Back to Game
 								</button>
@@ -106,8 +122,7 @@ class Chat extends Component {
 								</form>
 							</div>
 						</div>
-						<div className="col">
-						</div>
+						<div className="col" />
 					</div>
 				</div>
 				<Modal

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import moment from "moment";
+import socket from "../../components/Socket/Socket.js";
+import $ from "jquery";
 
 var today = moment().format("MM DD YY");
 
@@ -13,6 +15,18 @@ class Leaderboard extends Component {
 
 	componentWillMount() {
 		this.getScores();
+	}
+
+	componentDidMount() {
+		socket.on("score", data => {
+			console.log(data)
+			// var rank = "<td>2</td>"
+			// var name = "<td>" + data.name + "</td>"
+			// var date = "<td>" + data.time2 + "</td>"
+			// var score = "<td>" + data.score + "</td>"
+			// var tr = "<tr className='text-center'>" + rank + name + date + score + "</td>"
+			// $("#tbody").append(tr)
+		})
 	}
 
 	// Filter scoresToRender to only contain scores from today:
@@ -87,7 +101,7 @@ class Leaderboard extends Component {
 								<th scope="col">Score</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="tbody">
 							{this.state.scoresToRender.map((data, i) => {
 								return (
 									<tr key={i} className="text-center">

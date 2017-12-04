@@ -6,8 +6,10 @@ import UserGrid from "./UserGrid";
 import Modal from "react-responsive-modal";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-// import Countdown from "react-countdown-now";
+import socket from "../Socket/Socket.js";
+import moment from "moment";
 
+// Set up our two colors:
 const grey = "rgb(80, 80, 80)";
 const cyan = "rgb(0, 194, 255)";
 
@@ -136,7 +138,9 @@ class MemoryTiles extends Component {
 			var objToSendToDB = {};
 			objToSendToDB.name = name;
 			objToSendToDB.score = result * 100 / 25;
+			objToSendToDB.time2 = moment();
 			API.submitScore(objToSendToDB);
+			socket.emit("score", objToSendToDB)
 			this.setState({ result: result });
 			this.openModal();
 		}

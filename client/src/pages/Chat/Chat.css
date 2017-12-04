@@ -53,6 +53,26 @@
 	margin-right: 10px;
 }
 
+.servermsg {
+	font-family: "Jura", sans-serif;
+	text-align: justify;
+	font-size: 140%;
+	font-weight: 800;
+	color: #00ff0a;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.servermsgred {
+	font-family: "Jura", sans-serif;
+	text-align: justify;
+	font-size: 140%;
+	font-weight: 800;
+	color: red;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .fa {
 	margin-right: 6px;
 }
