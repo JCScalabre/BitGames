@@ -6,6 +6,7 @@ import Modal from "react-responsive-modal";
 import "./Chat.css";
 import { Link } from "react-router-dom";
 import socket from "../../components/Socket/Socket.js";
+
 var hasconnectedbefore = false;
 
 class Chat extends Component {
@@ -39,6 +40,10 @@ class Chat extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		socket.emit("hasdisconnected", this.state.name)
+	}
+
 	handleNameSubmit = event => {
 		event.preventDefault();
 		this.closeModal();
@@ -63,10 +68,10 @@ class Chat extends Component {
 		$("#message").val("");
 	};
 
-	back = event => {
-		// event.preventDefault();
-		socket.emit("hasdisconnected", this.state.name);
-	};
+	// back = event => {
+	// 	// event.preventDefault();
+	// 	socket.emit("hasdisconnected", this.state.name);
+	// };
 
 	openModal = () => {
 		this.setState({ modalIsOpen: true });
@@ -87,7 +92,6 @@ class Chat extends Component {
 							<Link to="/memorytiles">
 								<button
 									id="back"
-									onClick={this.back}
 									className="btn btn-primary"
 								>
 									<i className="fa fa-arrow-left" aria-hidden="true" />

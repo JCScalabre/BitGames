@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import moment from "moment";
 import socket from "../../components/Socket/Socket.js";
-import $ from "jquery";
+// import $ from "jquery";
 
 var today = moment().format("MM DD YY");
 
