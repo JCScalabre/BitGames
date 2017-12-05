@@ -146,6 +146,7 @@ class Chat extends Component {
 								className="form-control"
 								id="chatname"
 								type="text"
+								autoFocus
 							/>
 							<span className="input-group-btn">
 								<button
