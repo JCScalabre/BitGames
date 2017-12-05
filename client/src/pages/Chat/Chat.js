@@ -39,12 +39,22 @@ class Chat extends Component {
 					name
 				} has just connected!</div>`;
 				$("#chatbg").append(nametoappend);
+				// Auto scroll our chat:
+				if ($("#chatbg")[0]) {
+					var scrollHeight = $("#chatbg")[0].scrollHeight;
+					$("#chatbg").scrollTop(scrollHeight);
+				}
 			});
 			socket.on("hasdisconnected", name => {
 				var nametoappend = `<div class='servermsgred'>${
 					name
 				} has disconnected.</div>`;
 				$("#chatbg").append(nametoappend);
+				// Auto scroll our chat:
+				if ($("#chatbg")[0]) {
+					var scrollHeight = $("#chatbg")[0].scrollHeight;
+					$("#chatbg").scrollTop(scrollHeight);
+				}
 			});
 			hasconnectedbefore = true;
 		}
