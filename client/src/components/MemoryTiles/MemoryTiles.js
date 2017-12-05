@@ -126,7 +126,7 @@ class MemoryTiles extends Component {
 	// When the form is submitted:
 	handleSubmit = event => {
 		event.preventDefault();
-		// if (this.state.canbesubmitted) {
+		if (this.state.canbesubmitted) {
 			var result = 0;
 			var name = $("#name").val();
 			if (name === "") {
@@ -139,14 +139,14 @@ class MemoryTiles extends Component {
 			}
 			var objToSend = {};
 			objToSend.name = name;
-			// objToSend.score = result * 100 / 25;
-			objToSend.score = 55;
+			objToSend.score = result * 100 / 25;
+			// objToSend.score = 55;
 			objToSend.date = moment();
 			API.submitScore(objToSend);
 			socket.emit("score", objToSend)
 			this.setState({ result: result });
 			this.openModal();
-		// }
+		}
 	};
 
 	// Reset our game :
