@@ -91,6 +91,7 @@ class MemoryTiles extends Component {
 		}
 	};
 
+	// Our countdown function, which counts down from 5 to 0
 	timeremaining = () => {
 		var that = this;
 		var time = this.state.timeremaining;
@@ -115,6 +116,7 @@ class MemoryTiles extends Component {
 		}
 	};
 
+	// When time is up:
 	timeup = () => {
 		this.setState({ canbesubmitted: true });
 		$("#solutiongrid").css("display", "none");
@@ -124,7 +126,7 @@ class MemoryTiles extends Component {
 	// When the form is submitted:
 	handleSubmit = event => {
 		event.preventDefault();
-		if (this.state.canbesubmitted) {
+		// if (this.state.canbesubmitted) {
 			var result = 0;
 			var name = $("#name").val();
 			if (name === "") {
@@ -135,15 +137,16 @@ class MemoryTiles extends Component {
 					result++;
 				}
 			}
-			var objToSendToDB = {};
-			objToSendToDB.name = name;
-			objToSendToDB.score = result * 100 / 25;
-			objToSendToDB.time2 = moment();
-			API.submitScore(objToSendToDB);
-			socket.emit("score", objToSendToDB)
+			var objToSend = {};
+			objToSend.name = name;
+			// objToSend.score = result * 100 / 25;
+			objToSend.score = 55;
+			objToSend.date = moment();
+			API.submitScore(objToSend);
+			socket.emit("score", objToSend)
 			this.setState({ result: result });
 			this.openModal();
-		}
+		// }
 	};
 
 	// Reset our game :

@@ -19,13 +19,12 @@ class Leaderboard extends Component {
 
 	componentDidMount() {
 		socket.on("score", data => {
-			console.log(data)
-			// var rank = "<td>2</td>"
-			// var name = "<td>" + data.name + "</td>"
-			// var date = "<td>" + data.time2 + "</td>"
-			// var score = "<td>" + data.score + "</td>"
-			// var tr = "<tr className='text-center'>" + rank + name + date + score + "</td>"
-			// $("#tbody").append(tr)
+			var arr = this.state.scores
+			arr.push(data)
+			arr.sort(function(a, b) {
+				return (b.score) - (a.score)
+			})
+			this.setState({ scores: arr })
 		})
 	}
 

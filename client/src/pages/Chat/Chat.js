@@ -22,26 +22,34 @@ class Chat extends Component {
 				var time = message.time;
 				var contents = message.message;
 				var name = message.name;
-				var messagetoappend = `<div class='chatmsg'> [${time}] ${name}: ${contents} </div>`;
+				var messagetoappend = `<div class='chatmsg'> [${time}] ${name}: ${
+					contents
+				} </div>`;
 				$("#chatbg").append(messagetoappend);
-				var scrollHeight = $("#chatbg")[0].scrollHeight;
-				$("#chatbg").scrollTop(scrollHeight);
+				if ($("#chatbg")[0]) {
+					var scrollHeight = $("#chatbg")[0].scrollHeight;
+					$("#chatbg").scrollTop(scrollHeight);
+				}
 			});
 			socket.on("hasconnected", name => {
 				console.log(name + " has just connected!");
-				var nametoappend = `<div class='servermsg'>${name} has just connected!</div>`;
+				var nametoappend = `<div class='servermsg'>${
+					name
+				} has just connected!</div>`;
 				$("#chatbg").append(nametoappend);
 			});
 			socket.on("hasdisconnected", name => {
-				var nametoappend = `<div class='servermsgred'>${name} has disconnected.</div>`;
-				$("#chatbg").append(nametoappend)
-			})
+				var nametoappend = `<div class='servermsgred'>${
+					name
+				} has disconnected.</div>`;
+				$("#chatbg").append(nametoappend);
+			});
 			hasconnectedbefore = true;
 		}
 	}
 
 	componentWillUnmount() {
-		socket.emit("hasdisconnected", this.state.name)
+		socket.emit("hasdisconnected", this.state.name);
 	}
 
 	handleNameSubmit = event => {
@@ -68,11 +76,6 @@ class Chat extends Component {
 		$("#message").val("");
 	};
 
-	// back = event => {
-	// 	// event.preventDefault();
-	// 	socket.emit("hasdisconnected", this.state.name);
-	// };
-
 	openModal = () => {
 		this.setState({ modalIsOpen: true });
 	};
@@ -90,10 +93,7 @@ class Chat extends Component {
 					<div className="row">
 						<div className="col text-center">
 							<Link to="/memorytiles">
-								<button
-									id="back"
-									className="btn btn-primary"
-								>
+								<button id="back" className="btn btn-primary">
 									<i className="fa fa-arrow-left" aria-hidden="true" />
 									Back to Game
 								</button>
