@@ -140,7 +140,7 @@ class MemoryTiles extends Component {
 			var objToSend = {};
 			objToSend.name = name;
 			objToSend.score = result * 100 / 25;
-			// objToSend.score = 55;
+			// objToSend.score = 70;
 			objToSend.date = moment();
 			API.submitScore(objToSend);
 			socket.emit("score", objToSend)

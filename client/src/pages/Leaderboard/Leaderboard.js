@@ -15,28 +15,36 @@ class Leaderboard extends Component {
 
 	componentWillMount() {
 		this.getScores();
+		this.today();
 	}
 
 	componentDidMount() {
 		socket.on("score", data => {
-			var arr = this.state.scores
-			arr.push(data)
-			arr.sort(function(a, b) {
+			console.log(data)
+			var arr1 = this.state.scoresToRender
+			arr1.push(data)
+			arr1.sort(function(a, b) {
 				return (b.score) - (a.score)
 			})
-			this.setState({ scores: arr })
+			this.setState({ scoresToRender: arr1 })
+
+			var arr2 = this.state.scores
+			arr2.push(data)
+			arr2.sort(function(a, b) {
+				return (b.score) - (a.score)
+			})
 		})
 	}
 
 	// Filter scoresToRender to only contain scores from today:
 	today = () => {
-		var todayArr = [];
+		var arr = [];
 		for (var i = 0; i < this.state.scores.length; i++) {
 			if (moment(this.state.scores[i].date).format("MM DD YY") === today) {
-				todayArr.push(this.state.scores[i]);
+				arr.push(this.state.scores[i]);
 			}
 		}
-		this.setState({ scoresToRender: todayArr });
+		this.setState({ scoresToRender: arr });
 	};
 
 	// Filter scoresToRender to only contain scores from the past week
