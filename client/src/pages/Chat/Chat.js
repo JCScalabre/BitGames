@@ -59,6 +59,7 @@ class Chat extends Component {
 		this.closeModal();
 		if ($("#chatname").val() === "") {
 			this.setState({ name: "Anonymous" });
+			socket.emit("hasconnected", "Anonymous")
 		} else {
 			this.setState({ name: $("#chatname").val() });
 			socket.emit("hasconnected", $("#chatname").val());
