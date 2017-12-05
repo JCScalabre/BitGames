@@ -7,6 +7,7 @@ import "./Chat.css";
 import { Link } from "react-router-dom";
 import socket from "../../components/Socket/Socket.js";
 
+var swearjar = require("swearjar");
 var hasconnectedbefore = false;
 
 class Chat extends Component {
@@ -25,7 +26,8 @@ class Chat extends Component {
 				var messagetoappend = `<div class='chatmsg'> [${time}] ${name}: ${
 					contents
 				} </div>`;
-				$("#chatbg").append(messagetoappend);
+				$("#chatbg").append(swearjar.censor(messagetoappend));
+				// Auto scroll our chat:
 				if ($("#chatbg")[0]) {
 					var scrollHeight = $("#chatbg")[0].scrollHeight;
 					$("#chatbg").scrollTop(scrollHeight);

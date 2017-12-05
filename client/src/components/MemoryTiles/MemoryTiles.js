@@ -126,12 +126,26 @@ class MemoryTiles extends Component {
 	// When the form is submitted:
 	handleSubmit = event => {
 		event.preventDefault();
+		// Ensure that our game is in the right state to be submitted:
 		if (this.state.canbesubmitted) {
-			var result = 0;
-			var name = $("#name").val();
-			if (name === "") {
-				name = "Anonymous";
-			}
+		var result = 0;
+		var name = $("#name").val();
+		// If name was left empty, assign "Anonymous" to it:
+		if (name === "") {
+			name = "Anonymous";
+		}
+		// Determine how many answers the user has submitted:
+		// var amountofanswers = 0;
+		// for (var i = 0; i < this.state.grid.length; i++) {
+		// 	if (this.state.grid[i] === 1) {
+		// 		amountofanswers++;
+		// 	}
+		// }
+		// if (amountofanswers === 0) {
+		// 	console.log("Uh oh! It looks like you haven't submitted anything!");
+		// } else {
+			
+			// Calculate score by looping through arrays and comparing answers:
 			for (var i = 0; i < this.state.solution.length; i++) {
 				if (this.state.solution[i] === this.state.grid[i]) {
 					result++;
@@ -140,30 +154,63 @@ class MemoryTiles extends Component {
 			var objToSend = {};
 			objToSend.name = name;
 			objToSend.score = result * 100 / 25;
-			// objToSend.score = 70;
 			objToSend.date = moment();
+			// Send Obj to DB:
 			API.submitScore(objToSend);
-			socket.emit("score", objToSend)
+			// Emit Obj to socket:
+			socket.emit("score", objToSend);
 			this.setState({ result: result });
 			this.openModal();
 		}
+		// }
 	};
 
 	// Reset our game :
 	reset = () => {
 		this.shuffle(this.state.solution);
-		this.setState({ timeremaining: 5 })
+		this.setState({ timeremaining: 5 });
 		this.setState({ gameisrunning: false });
 		this.setState({ canbesubmitted: false });
 		$("#blankgrid").css("display", "block");
 		$("#usergrid").css("display", "none");
 		$(".usersquare").css("background-color", grey);
+		this.setState({
+			grid: [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			]
+		});
 	};
 
+	// Open Modal
 	openModal = () => {
 		this.setState({ modalIsOpen: true });
 	};
 
+	// Close Modal and reset game
 	closeModal = () => {
 		this.setState({ modalIsOpen: false });
 		this.reset();
@@ -225,7 +272,10 @@ class MemoryTiles extends Component {
 						</Link>
 						<Link to="/leaderboard">
 							<button className="btn btn-primary">
-								<i className="fa fa-star" aria-hidden="true" />Leaderboard
+								<i
+									className="fa fa-star"
+									aria-hidden="true"
+								/>Leaderboard
 							</button>
 						</Link>
 					</div>
@@ -260,9 +310,7 @@ class MemoryTiles extends Component {
 				>
 					<h2>Congrats!</h2>
 					<p>
-						You scored {this.state.result * 100 / 25}% ({
-							this.state.result
-						}{" "}
+						You scored {this.state.result * 100 / 25}% ({this.state.result}{" "}
 						out of 25 correct).
 					</p>
 					<div className="row">
